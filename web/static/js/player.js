@@ -21,6 +21,7 @@
   }
 
   function cue(id, videoId) {
+    console.log("QUEUEING NOW")
     currentId = id;
     body.classList.remove('idle');
     unlock.hidden = true;
@@ -44,7 +45,11 @@
 
   unlock.addEventListener('click', function () { unlock.hidden = true; if (currentId) player.playVideo(); });
 
-  window.onYouTubeIframeApiReady = function () {
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+
+  window.onYouTubeIframeAPIReady = function () {
     player = new YT.Player('player', {
       width: '100%', height: '100%',
       playerVars: { autoplay: 0, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1 },
@@ -60,8 +65,4 @@
       }
     });
   };
-
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
 })();
