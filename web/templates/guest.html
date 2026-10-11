@@ -1,0 +1,57 @@
+{{template "head"}}</head>
+<body class="guest">
+<main class="card">
+  <h1>KaraKoek</h1>
+  {{if eq .State "notice"}}
+    <p class="notice">Please open this page by scanning the QR code on your table.</p>
+  {{else}}
+    {{if .Name}}<p class="muted">Singing as <strong>{{.Name}}</strong> · Table {{.Table}}</p>{{end}}
+    {{if .Flash}}<p class="banner ok" role="status">{{.Flash}}</p>{{end}}
+    {{if .Error}}<p class="banner err" role="alert">{{.Error}}</p>{{end}}
+    {{if gt .Cooldown 0}}
+      <p class="banner wait" role="status" id="cooldown" data-remaining="{{.Cooldown}}">
+        You can request again in <span id="cd-time"></span>
+      </p>
+    {{end}}
+
+    <form method="post" action="/request" id="request-form" autocomplete="off" {{if .AskName}}inert{{end}}>
+      <input type="hidden" name="csrf" value="{{.CSRF}}">
+      <label>Song name
+        <input name="song" required maxlength="100" autocomplete="off" value="{{.Song}}">
+      </label>
+      <label>Artist name
+        <input name="artist" required maxlength="100" autocomplete="off" value="{{.Artist}}">
+      </label>
+      <label>Link <span class="muted">(optional)</span>
+        <input name="link" type="url" inputmode="url" maxlength="300" autocomplete="off" value="{{.Link}}" placeholder="https://www.youtube.com/watch?v=…">
+        <span class="hint">Recommended: add a YouTube link so your song starts faster.</span>
+      </label>
+      {{if .PriorityUsed}}
+        <p class="muted">Priority request already used.</p>
+      {{else}}
+        <label class="toggle">
+          <input type="checkbox" name="priority" value="1" {{if .Priority}}checked{{end}}>
+          <span>Priority request <span class="muted">(once per guest)</span></span>
+        </label>
+      {{end}}
+      <button type="submit" id="submit-btn" {{if gt .Cooldown 0}}disabled{{end}}>Request song</button>
+    </form>
+
+    {{if .AskName}}
+    <dialog id="name-dialog" data-open="1">
+      <form method="post" action="/join">
+        <input type="hidden" name="code" value="{{.Code}}">
+        <h2>Welcome!</h2>
+        <label>What's your name?
+          <input name="name" required maxlength="40" autocomplete="off" autofocus>
+        </label>
+        {{if .NameError}}<p class="banner err" role="alert">{{.NameError}}</p>{{end}}
+        <button type="submit">Continue</button>
+      </form>
+    </dialog>
+    {{end}}
+  {{end}}
+</main>
+<script src="/static/js/guest.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{{template "head"}}<meta name="csrf-token" content="{{.CSRF}}"></head>
+<body class="admin">
+<header class="bar">
+  <h1>Queue</h1>
+  <span id="screen-status" class="pill off">No player screen</span>
+  <span id="conn" class="pill off">Connecting…</span>
+  <a href="/admin/player" target="_blank" rel="noopener" class="linkbtn">Open player</a>
+  <form method="post" action="/admin/logout">
+    <input type="hidden" name="csrf" value="{{.CSRF}}">
+    <button type="submit" class="secondary">Log out</button>
+  </form>
+</header>
+
+<p id="toast" class="banner err" role="alert" hidden></p>
+
+<main>
+  <table id="queue">
+    <thead>
+      <tr><th>Requester</th><th>Table</th><th>Priority</th><th>Song</th><th>Artist</th><th>Link</th><th>Controls</th></tr>
+    </thead>
+    <tbody id="queue-body"></tbody>
+  </table>
+  <p id="empty" class="muted" hidden>The queue is empty.</p>
+</main>
+
+<section id="panel" class="panel" hidden>
+  <div class="now"><span class="muted">Now:</span> <strong id="now-title"></strong></div>
+  <div class="btns">
+    <button id="b-play">Play</button>
+    <button id="b-pause" class="secondary">Pause</button>
+    <button id="b-rewind" class="secondary">Rewind</button>
+    <button id="b-finish">Finish</button>
+    <button id="b-undo" class="secondary">Undo</button>
+  </div>
+</section>
+<script src="/static/js/ws.js"></script>
+<script src="/static/js/queue.js"></script>
+</body>
+</html>
