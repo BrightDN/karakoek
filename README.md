@@ -1,7 +1,6 @@
 # KaraKoek
 
 Phone-first karaoke request site. Go + PostgreSQL + WebSockets, run with Docker Compose.
-Implements the *Karaoke Request Site: Technical Design*.
 
 ## Run
 
