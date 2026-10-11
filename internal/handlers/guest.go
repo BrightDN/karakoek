@@ -6,8 +6,8 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"karakoek/internal/session"
-	"karakoek/internal/youtube"
+	"github.com/BrightDN/karakoek/internal/session"
+	"github.com/BrightDN/karakoek/internal/youtube"
 )
 
 const (

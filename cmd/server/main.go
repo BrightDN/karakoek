@@ -12,14 +12,13 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/BrightDN/karakoek/internal/config"
+	"github.com/BrightDN/karakoek/internal/db"
+	"github.com/BrightDN/karakoek/internal/handlers"
+	"github.com/BrightDN/karakoek/internal/hub"
+	"github.com/BrightDN/karakoek/internal/queue"
+	"github.com/BrightDN/karakoek/internal/session"
 	"golang.org/x/crypto/bcrypt"
-
-	"karakoek/internal/config"
-	"karakoek/internal/db"
-	"karakoek/internal/handlers"
-	"karakoek/internal/hub"
-	"karakoek/internal/queue"
-	"karakoek/internal/session"
 )
 
 func main() {

@@ -15,13 +15,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/BrightDN/karakoek/internal/config"
+	"github.com/BrightDN/karakoek/internal/hub"
+	"github.com/BrightDN/karakoek/internal/queue"
+	"github.com/BrightDN/karakoek/internal/session"
+	"github.com/BrightDN/karakoek/web"
 	"github.com/jackc/pgx/v5/pgxpool"
-
-	"karakoek/internal/config"
-	"karakoek/internal/hub"
-	"karakoek/internal/queue"
-	"karakoek/internal/session"
-	"karakoek/web"
 )
 
 type App struct {

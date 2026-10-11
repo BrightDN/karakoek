@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/crypto/bcrypt"
+	"github.com/BrightDN/karakoek/internal/youtube"
 
-	"karakoek/internal/queue"
-	"karakoek/internal/youtube"
+	"github.com/BrightDN/karakoek/internal/queue"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type adminView struct {

@@ -13,9 +13,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/BrightDN/karakoek/internal/queue"
 	"github.com/gorilla/websocket"
-
-	"karakoek/internal/queue"
 )
 
 const (
