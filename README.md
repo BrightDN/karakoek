@@ -1,6 +1,6 @@
 # KaraKoek
--# Disclaimer: This project is heavily created through an AI-prompt. It works exactly as intended however I cannot take the credits for it. (Prompted using a tech doc)
--# This is just as a Proof of Concept.
+Disclaimer: This project is heavily created through an AI-prompt. It works exactly as intended however I cannot take the credits for it. (Prompted using a tech doc)
+This is just as a Proof of Concept.
 
 Phone-first karaoke request site. Go + PostgreSQL + WebSockets, run with Docker Compose.
 
