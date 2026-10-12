@@ -3,50 +3,50 @@
 <main class="card">
   <h1>KaraKoek</h1>
   {{if eq .State "notice"}}
-    <p class="notice">Please open this page by scanning the QR code on your table.</p>
+    <p class="notice">Open deze pagina door de QR code op een tafel te scannen.</p>
   {{else}}
-    {{if .Name}}<p class="muted">Singing as <strong>{{.Name}}</strong> · Table {{.Table}}</p>{{end}}
+    {{if .Name}}<p class="muted">Zingen als <strong>{{.Name}}</strong> - Tafel {{.Table}}</p>{{end}}
     {{if .Flash}}<p class="banner ok" role="status">{{.Flash}}</p>{{end}}
     {{if .Error}}<p class="banner err" role="alert">{{.Error}}</p>{{end}}
     {{if gt .Cooldown 0}}
       <p class="banner wait" role="status" id="cooldown" data-remaining="{{.Cooldown}}">
-        You can request again in <span id="cd-time"></span>
+        Je kan opnieuw een liedje aanvragen in <span id="cd-time"></span>
       </p>
     {{end}}
 
     <form method="post" action="/request" id="request-form" autocomplete="off" {{if .AskName}}inert{{end}}>
       <input type="hidden" name="csrf" value="{{.CSRF}}">
-      <label>Song name
+      <label>Lied naam
         <input name="song" required maxlength="100" autocomplete="off" value="{{.Song}}">
       </label>
-      <label>Artist name
+      <label>Artiesten naam / muziekgroep
         <input name="artist" required maxlength="100" autocomplete="off" value="{{.Artist}}">
       </label>
-      <label>Link <span class="muted">(optional)</span>
+      <label>Link <span class="muted">(optioneel)</span>
         <input name="link" type="url" inputmode="url" maxlength="300" autocomplete="off" value="{{.Link}}" placeholder="https://www.youtube.com/watch?v=…">
-        <span class="hint">Recommended: add a YouTube link so your song starts faster.</span>
+        <span class="hint">Aangeraden: Voeg een YouTube link in zodat je liedje sneller kan starten.</span>
       </label>
       {{if .PriorityUsed}}
-        <p class="muted">Priority request already used.</p>
+        <p class="muted">Prioriteitsaanvraag al gebruikt.</p>
       {{else}}
         <label class="toggle">
           <input type="checkbox" name="priority" value="1" {{if .Priority}}checked{{end}}>
-          <span>Priority request <span class="muted">(once per guest)</span></span>
+          <span>Prioriteitsaanvraag <span class="muted">(1 per gast)</span></span>
         </label>
       {{end}}
-      <button type="submit" id="submit-btn" {{if gt .Cooldown 0}}disabled{{end}}>Request song</button>
+      <button type="submit" id="submit-btn" {{if gt .Cooldown 0}}disabled{{end}}>Vraag lied aan</button>
     </form>
 
     {{if .AskName}}
     <dialog id="name-dialog" data-open="1">
       <form method="post" action="/join">
         <input type="hidden" name="code" value="{{.Code}}">
-        <h2>Welcome!</h2>
-        <label>What's your name?
+        <h2>Welkom!</h2>
+        <label>Wat is je naam?
           <input name="name" required maxlength="40" autocomplete="off" autofocus>
         </label>
         {{if .NameError}}<p class="banner err" role="alert">{{.NameError}}</p>{{end}}
-        <button type="submit">Continue</button>
+        <button type="submit">Ga verder</button>
       </form>
     </dialog>
     {{end}}

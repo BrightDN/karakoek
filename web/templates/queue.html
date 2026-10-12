@@ -2,8 +2,8 @@
 <body class="admin">
 <header class="bar">
   <h1>Queue</h1>
-  <span id="screen-status" class="pill off">No player screen</span>
-  <span id="conn" class="pill off">Connecting…</span>
+  <span id="screen-status" class="pill off">Geen afspeelscherm</span>
+  <span id="conn" class="pill off">Connecteren…</span>
   <a href="/admin/player" target="_blank" rel="noopener" class="linkbtn">Open player</a>
   <form method="post" action="/admin/logout">
     <input type="hidden" name="csrf" value="{{.CSRF}}">
@@ -16,21 +16,28 @@
 <main>
   <table id="queue">
     <thead>
-      <tr><th>Requester</th><th>Table</th><th>Priority</th><th>Song</th><th>Artist</th><th>Link</th><th>Controls</th></tr>
+      <tr>
+        <th>Aanvrager</th>
+        <th>Tafel</th>
+        <th>Prioriteit</th>
+        <th>Lied</th>
+        <th>Artiest</th>
+        <th>Link</th>
+        <th>Acties</th></tr>
     </thead>
     <tbody id="queue-body"></tbody>
   </table>
-  <p id="empty" class="muted" hidden>The queue is empty.</p>
+  <p id="empty" class="muted" hidden>De queue is leeg.</p>
 </main>
 
 <section id="panel" class="panel" hidden>
-  <div class="now"><span class="muted">Now:</span> <strong id="now-title"></strong></div>
+  <div class="now"><span class="muted">Nu:</span> <strong id="now-title"></strong></div>
   <div class="btns">
     <button id="b-play">Play</button>
     <button id="b-pause" class="secondary">Pause</button>
-    <button id="b-rewind" class="secondary">Rewind</button>
+    <button id="b-rewind" class="secondary">Restart</button>
     <button id="b-finish">Finish</button>
-    <button id="b-undo" class="secondary">Undo</button>
+    <button id="b-undo" class="secondary">Terug naar lijst</button>
   </div>
 </section>
 <script src="/static/js/ws.js"></script>
