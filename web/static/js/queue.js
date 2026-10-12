@@ -19,8 +19,8 @@
   }
 
   var ws = connectWS('controller', {
-    open: function () { connPill.textContent = 'Connected'; connPill.className = 'pill on'; },
-    close: function () { connPill.textContent = 'Reconnecting…'; connPill.className = 'pill off'; },
+    open: function () { connPill.textContent = 'Verbonden'; connPill.className = 'pill on'; },
+    close: function () { connPill.textContent = 'Verbinding zoeken…'; connPill.className = 'pill off'; },
     queue_updated: function (p) {
       current = p.current || null;
       if (p.state) state = p.state;
@@ -29,7 +29,7 @@
     player_state: function (p) { state = p.state; renderPanel(); },
     screen_status: function (p) {
       var on = p.connected > 0;
-      screenPill.textContent = on ? 'Player screen connected' : 'No player screen';
+      screenPill.textContent = on ? 'Player scherm verbonden' : 'Geen spelerscherm';
       screenPill.className = 'pill ' + (on ? 'on' : 'off');
     },
     error: function (p) { showError(p.message || 'Error'); }
@@ -67,7 +67,7 @@
       var tr = el('tr', r.priority ? 'prio' : '');
       tr.appendChild(cell('Requester', r.requester));
       tr.appendChild(cell('Table', String(r.table)));
-      tr.appendChild(cell('Priority', r.priority ? el('span', 'badge', '★ Priority') : ''));
+      tr.appendChild(cell('Priority', r.priority ? el('span', 'badge', '★ Prioriteit') : ''));
       tr.appendChild(cell('Song', r.song));
       tr.appendChild(cell('Artist', r.artist));
 
@@ -88,12 +88,12 @@
       tr.appendChild(cell('Link', linkCell));
 
       var ctl = el('div', 'btns');
-      var play = el('button', '', 'Play');
+      var play = el('button', '', 'Afspelen');
       play.disabled = !r.link || !!current;
       play.addEventListener('click', function () { ws.send('GetVideo', { requestId: r.id }); });
-      var rm = el('button', 'danger', 'Remove');
+      var rm = el('button', 'danger', 'Verwijder');
       rm.addEventListener('click', function () {
-        if (confirm('Remove "' + r.song + '" requested by ' + r.requester + '?')) api('DELETE', '/admin/requests/' + r.id);
+        if (confirm('Verwijder "' + r.song + '" aangevraagd door ' + r.requester + '?')) api('DELETE', '/admin/requests/' + r.id);
       });
       ctl.appendChild(play); ctl.appendChild(rm);
       tr.appendChild(cell('Controls', ctl));
